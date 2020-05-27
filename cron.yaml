@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: tgrunner
 spec:
-  schedule: "*/30 * * * *"
+  schedule: "*/15 * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -14,13 +14,25 @@ spec:
             image: coryschwartz/tgrunner:latest
             env:
             - name: DAEMON
-              value: testground-daemon:8042
+              value:
             - name: GITREPO
-              value: https://github.com/drand/test-plans
+              value:
             - name: PLAN
-              value: test-plans/ceremony
+              value:
             - name: TESTCASE
-              value: ceremony
+              value:
             - name: INSTANCES
-              value: "7"
+              value:
+            - name: NAME
+              value:
+            - name: KOPS_STATE_STORE
+              value:
+            - name: AWS_DEFAULT_REGION
+              value:
+            - name: AWS_SECRET_ACCESS_KEY
+              value:
+            - name: AWS_ACCESS_KEY_ID
+              value:
+            - name: AWS_REGION
+              value:
           restartPolicy: OnFailure
