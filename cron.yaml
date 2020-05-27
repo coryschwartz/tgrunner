@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: tgrunner
+spec:
+  schedule: "*/30 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: tgrunner
+            image: coryschwartz/tgrunner:latest
+            env:
+            - name: DAEMON
+              value: testground-daemon:8042
+            - name: GITREPO
+              value: https://github.com/drand/test-plans
+            - name: PLAN
+              value: test-plans/ceremony
+            - name: TESTCASE
+              value: ceremony
+            - name: INSTANCES
+              value: "7"
+          restartPolicy: OnFailure
