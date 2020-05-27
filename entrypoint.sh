@@ -8,7 +8,7 @@ echo daemon: "$DAEMON"
 # Scale up
 /usr/local/bin/kops export kubecfg --name "$NAME"
 /usr/local/bin/kops replace -f large.yaml --force
-/usr/local/bin/kops kops update cluster --name "$NAME" --yes
+/usr/local/bin/kops kops update cluster --yes --name "$NAME"
 /usr/local/bin/kops validate cluster --wait 600s
 
 
@@ -25,5 +25,5 @@ echo daemon: "$DAEMON"
 				     --build-cfg go_proxy_mode=direct
 
 # Scale down
-/usr/local/bin/kops delete ig nodes --yes
-/usr/local/bin/kops update cluster --name "$NAME" --yes
+/usr/local/bin/kops replace -f small.yaml --force
+/usr/local/bin/kops update cluster --yes --name "$NAME"
